@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 
+
 int concat_begin(const int first[], int size, const int second[], int size2, int dest[], int size3)
 {
     if (size + size2 > size3) {
