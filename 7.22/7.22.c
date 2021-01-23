@@ -54,14 +54,16 @@ int concat_zip(const int first[], int size, const int second[], int size2, int d
             n++;
         }
     }
+    int k = n;
     for (int i = numOfIteration; i < (size + size2); i++) {
         if (mlg == 1) {
-            dest[i] = second[i];
+            dest[i] = second[k];
         }
         else {
-            dest[i] = first[i];
+            dest[i] = first[k];
         }
         num++;
+        k++;
     }
     return j + n + num;
 }
