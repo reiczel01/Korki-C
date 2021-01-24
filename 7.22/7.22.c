@@ -7,6 +7,9 @@
 
 int concat_begin(const int first[], int size, const int second[], int size2, int dest[], int size3)
 {
+    if (size<1||size2<1|| size3<1) {
+        return -1;
+    }
     if (size + size2 > size3) {
         return -2;
     }
@@ -29,6 +32,9 @@ int concat_end(const int first[], int size, const int second[], int size2, int d
     return concat_begin(second, size2, first, size, dest, size3);
 }
 int concat_zip(const int first[], int size, const int second[], int size2, int dest[], int size3) {
+    if (size < 1 || size2 < 1 || size3 < 1) {
+        return -1;
+    }
     if (size + size2 > size3) {
         return -2;
     }
@@ -75,7 +81,7 @@ void display_vector(const int vec[], int size) {
 }
 int read_vector(int vec[], int size, int stop_value) {
     int i = 0;
-    if (size == 0) {
+    if (size<1) {
         return -1;
     }
     while(1){
