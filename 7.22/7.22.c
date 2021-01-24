@@ -7,6 +7,7 @@
 
 int concat_begin(const int first[], int size, const int second[], int size2, int dest[], int size3)
 {
+ 
     if (size<1||size2<1|| size3<1) {
         return -1;
     }
@@ -84,10 +85,19 @@ int read_vector(int vec[], int size, int stop_value) {
     if (size<1) {
         return -1;
     }
+    int sum = 0;
     while(1){
         int temp = 0;
         if (scanf("%d", &temp) != 1){
+            printf("incorrect input\n");
         return -2;
+        }
+        
+            sum = temp + sum;
+        
+        if (0 == sum) {
+            printf("not enough data available");
+            return 1;
         }
         if (temp == stop_value)
         {
