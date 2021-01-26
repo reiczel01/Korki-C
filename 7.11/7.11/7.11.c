@@ -11,51 +11,43 @@ int is_prime(int a) {
 	}
 	return 1;
 }
-int my_abs(int a) {
-	if (a < 0) {
-		return a * -1;
-	}
-	else {
-		return a;
-	}
-}
-int main() {
-	
-	int x = 0, y = 0, i = 0, mn = 0, mx =0;
+//int my_abs(int a) {
+//	if (a < 0) {
+//		return a * -1;
+//	}
+//	else {
+//		return a;
+//	}
+//}
+
+int main()
+{
+	int x;
+	int y;
+	int inValue = 0;
+	int count = 0;
 	printf("Podaj x1 = ");
-	if (scanf("%d", &x) != 1) {
+	inValue += scanf("%d", &x);
+	if (inValue != 1){
 		printf("Incorrect input");
 		return 1;
 	}
 	printf("Podaj x2 = ");
-	if (scanf("%d", &y) != 1) {
+	inValue += scanf("%d", &y);
+
+	if (inValue != 2 || y < x){
 		printf("Incorrect input");
 		return 1;
 	}
-	if (x > y) {
-		mn = x;
-		mx = y;
-	}
-	else {
-		mn = y;
-		mx = x;
-	}
-	//int count = 0;
-	if (x == y) {
-		printf("Nothing to show");
-		return 2;
-	}
-	for (i = my_abs(mn - mx); i < mn; i++){
-		is_prime(i);
-		int redValue = is_prime(i);
-		if (redValue == 1) {
+
+	for (int i = x; i <= y; i++){
+		if (is_prime(i)){
 			printf("%d ", i);
-			//count = 1 + count;
+			count++;
 		}
-		/*if (count == 0 && i != my_abs(x - y)) {
-			printf("Nothing to show");
-			return 2;
-		}*/
 	}
-	
+
+	if (count == 0) {
+		printf("Nothing to show");
+	}
 }
