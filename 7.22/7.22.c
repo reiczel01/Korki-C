@@ -7,7 +7,7 @@
 
 int concat_begin(const int first[], int size, const int second[], int size2, int dest[], int size3)
 {
- 
+
     if (size<1||size2<1|| size3<1) {
         return -1;
     }
@@ -33,6 +33,7 @@ int concat_end(const int first[], int size, const int second[], int size2, int d
     return concat_begin(second, size2, first, size, dest, size3);
 }
 int concat_zip(const int first[], int size, const int second[], int size2, int dest[], int size3) {
+  
     if (size < 1 || size2 < 1 || size3 < 1) {
         return -1;
     }
@@ -85,30 +86,28 @@ int read_vector(int vec[], int size, int stop_value) {
     if (size<1) {
         return -1;
     }
-    int sum = 0;
+   
     while(1){
         int temp = 0;
         if (scanf("%d", &temp) != 1){
             printf("incorrect input\n");
         return -2;
         }
-        
-            sum = temp + sum;
-        
-        if (0 == sum) {
+        if (i == 0 && temp == stop_value) {
             printf("not enough data available");
-            return 1;
+            return -3;
         }
         if (temp == stop_value)
         {
             return i;
         }
         if (i == size) {
-            return i;
+            continue;
         }
         vec[i] = temp;
         i++;
     }
+    return i;
 }
 
 int main() {
@@ -117,23 +116,48 @@ int main() {
     int dest[100];
     printf("podaj pierwszy wektor: ");
     int inValue = read_vector(first, 50, 0);
+    if (inValue == -2 ) {
+        return 1;
+    }else if (inValue == -3) {
+        return 2;
+    }
     printf("podaj drugi wektor: ");
     int in2Value = read_vector(second, 50, 0);
-
+    if (in2Value == -2) {
+        return 1;
+    }else if(in2Value == -3) {
+        return 2;
+    }
     display_vector(first, inValue);
     printf("\n");
     display_vector(second, in2Value);
     printf("\n");
-   
+    
+    if (inValue + in2Value > 50) {
+        printf("Output buffer is too small\n");
+        return 0;
+    }
    int retValue = concat_begin(first,inValue, second,in2Value ,dest, in2Value+inValue );
-   display_vector(dest, retValue);
+   if (retValue != -2) {
+       display_vector(dest, retValue);
+       printf("\n");
+   }
+  
+   
    retValue = concat_end(first, inValue, second, in2Value, dest, in2Value + inValue);
-   printf("\n");
-    display_vector(dest, retValue);
-    printf("\n");
+   if (retValue != -2) {
+       display_vector(dest, retValue);
+       printf("\n");
+   }
+  
+
+   
     retValue = concat_zip(first, inValue, second, in2Value, dest, in2Value + inValue);
-    display_vector(dest, retValue);
-    printf("\n");
+    if (retValue != -2) {
+        display_vector(dest, retValue);
+        printf("\n");
+    }
    
-   
+
+    return 0;
 }
