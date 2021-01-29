@@ -52,7 +52,7 @@ int main()
 		}
 	}
 	printf("%d %d\n", numFoLongWords, maxCount);
-	for (int i = countOfWords; i >= 0; i--) {
+	for (int i = countOfWords - 1; i >= 0; i--) {
 		if (tab[i] != ' ') {
 			count++;
 			
