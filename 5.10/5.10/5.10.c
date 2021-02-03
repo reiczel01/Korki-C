@@ -12,7 +12,7 @@ int main()
 	int count = 0, countOfWords = 0;
 	int maxCount = 0;
 	
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 10000; i++) {
 		if (tab[i] == '\n') {
 			break;
 		}
@@ -25,7 +25,7 @@ int main()
 				maxCount = count;
 				
 			}
-			count = 0;
+			//count = 0;
 		}
 		else {
 			printf("Incorrect input");
