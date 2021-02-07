@@ -1,0 +1,31 @@
+gcc -ggdb3 -std=c11 -x c -fdiagnostics-color -pedantic -Werror -Wall -Wextra -fmax-errors=5 -Werror=vla -Wno-error=unused-parameter -Wno-error=implicit-fallthrough -Wno-error=parentheses -Wno-parentheses -D_GNU_SOURCE -D_HTML_OUTPUT -DINSIDE_DANTE -fdump-tree-gimple-lineno=10.11.c.gimple -c 10.11.c -o 10.11.o
+Wynik polecenia (kod b³êdu = 1):
+
+In file included from 10.11.c:3:
+vector_utils.h:4:68: error: ISO C forbids forward references to ‘enum’ types [-Werror=pedantic]
+ int shift(int* array, int array_size, int positions_to_shift, enum direction dir);
+                                                                    ^~~~~~~~~
+vector_utils.h:4:68: error: ‘enum direction’ declared inside parameter list will not be visible outside of this definition or declaration [-Werror]
+10.11.c: In function ‘main’:
+10.11.c:42:38: error: type of formal parameter 4 is incomplete
+     shift(tab, size, przesuniencie , dir);
+                                      ^~~
+cc1: all warnings being treated as errors
+Wywo³anie:
+
+gcc -ggdb3 -std=c11 -x c -fdiagnostics-color -pedantic -Werror -Wall -Wextra -fmax-errors=5 -Werror=vla -Wno-error=unused-parameter -Wno-error=implicit-fallthrough -Wno-error=parentheses -Wno-parentheses -D_GNU_SOURCE -D_HTML_OUTPUT -DINSIDE_DANTE -fdump-tree-gimple-lineno=vector_utils.c.gimple -c vector_utils.c -o vector_utils.o
+Wynik polecenia (kod b³êdu = 1):
+
+In file included from vector_utils.c:2:
+vector_utils.h:4:68: error: ISO C forbids forward references to ‘enum’ types [-Werror=pedantic]
+ int shift(int* array, int array_size, int positions_to_shift, enum direction dir);
+                                                                    ^~~~~~~~~
+vector_utils.h:4:68: error: ‘enum direction’ declared inside parameter list will not be visible outside of this definition or declaration [-Werror]
+vector_utils.c:33:5: error: conflicting types for ‘shift’
+ int shift(int* array, int array_size, int positions_to_shift, enum direction dir) {
+     ^~~~~
+In file included from vector_utils.c:2:
+vector_utils.h:4:5: note: previous declaration of ‘shift’ was here
+ int shift(int* array, int array_size, int positions_to_shift, enum direction dir);
+     ^~~~~
+cc1: all warnings being treated as errors
