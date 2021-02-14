@@ -31,7 +31,7 @@ void display_vector(const int* tab, int size) {
 
 }
 int shift(int* array, int array_size, int positions_to_shift, enum direction dir) {
-    if (array_size < 0 || array == NULL || positions_to_shift < 0 || dir < 1 || dir > 2) {
+    if (array_size <= 0 || array == NULL || positions_to_shift < 0 || dir < 1 || dir > 2) {
         return 1;
      }
     if (positions_to_shift == 0) {
@@ -47,7 +47,9 @@ int shift(int* array, int array_size, int positions_to_shift, enum direction dir
     }
     
     if(positions_to_shift>array_size){
-        positions_to_shift = positions_to_shift - array_size;
+        while (positions_to_shift > array_size) {
+            positions_to_shift = positions_to_shift - array_size;
+        }
     }
     switch (dir)
     {
@@ -78,12 +80,13 @@ int shift(int* array, int array_size, int positions_to_shift, enum direction dir
                     *(tempptr + j) = *(array + i);// przesuwanie znaków kture muszę dopisac do końca
                     j++;
                 }
-                for (int i = array_size - positions_to_shift; i >= 0; i--) { // przesuwamy całość o pozition to shift w prawo analogicznie do wcześniejszego switcha
-                    *(array + i +positions_to_shift ) = *(array + i);
+                for (int i = array_size - positions_to_shift - 1; i >= 0; i--) { // przesuwamy całość o pozition to shift w prawo analogicznie do wcześniejszego switcha
+                    *(array + i + positions_to_shift ) = *(array + i);
                 }
                 for (int i = 0; i < positions_to_shift; i++) { // nadpisujemy na początek naszego przesunięcia zawinięte elementy z temp1
                     *(array + i) = *(tempptr + i);
                 }
+                
         }
         break;
         default:
