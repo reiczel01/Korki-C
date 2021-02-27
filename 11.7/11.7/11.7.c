@@ -1,12 +1,15 @@
 ﻿
 
 #include <stdio.h>
-char* reverse(char* text) {
+
+char* reverse(char* text, int isSingleWordReverse) {
 	if (text == NULL) {
 		return NULL;
 	}
 	int i = 0;
-	while (*(text + i) != '\0') {
+
+	while ((isSingleWordReverse == 0 && *(text + i) != '\0') ||
+			(isSingleWordReverse == 1 && (*(text + i) != ' ') && *(text + i) != '\0') ) {
 		i++;
 	}
 	int n = i;
@@ -26,7 +29,7 @@ char* remove_non_letters(char* text) {
 	int i = 0;
 	while (*(text + i) != '\0') {
 		char tempT = *(text + i);
-		if (!(tempT <= 'z' && tempT >= 'a' || tempT <= 'Z' && tempT >= 'A' )) {
+		if (!(tempT <= 'z' && tempT >= 'a' || tempT <= 'Z' && tempT >= 'A')) {
 			*(text + i) = ' ';
 		}
 		i++;
@@ -48,7 +51,7 @@ char* trim(char* text) {
 		if (tempT == ' ') {
 			spaceCounter++;
 		}
-		if (tempT != ' ' && ((spaceCounter > 1 ) || (spaceCounter == 1 && firstSpace == 1))) {
+		if (tempT != ' ' && ((spaceCounter > 1) || (spaceCounter == 1 && firstSpace == 1))) {
 			int n = i;
 			while (*(text + n) != '\0') {
 				if (firstSpace == 1) {
@@ -64,9 +67,9 @@ char* trim(char* text) {
 			}
 			else
 			{
-				*(text + n - spaceCounter+1) = '\0';
+				*(text + n - spaceCounter + 1) = '\0';
 			}
-			
+
 			i = i - spaceCounter;
 			spaceCounter = 0;
 			firstSpace = 0;
@@ -81,9 +84,36 @@ char* trim(char* text) {
 	}
 	return text;
 }
+char* swap_order_words(char* txt) {
+	if (txt == NULL) {
+		return NULL;
+	}
+	remove_non_letters(txt);
+	trim(txt);
+
+	
+
+	reverse(txt, 0);
+	int i = 0;
+	int firstSign = 0;
+	while (*(txt + i) != '\0') {
+		char tempT = *(txt + i);
+
+		if (tempT != ' ' && firstSign == 0) {
+			reverse(txt + i, 1);
+			firstSign = 1;
+		}
+		if (tempT == ' ') {
+			firstSign = 0;
+		}
+		i++;
+	}
+	return txt;
+}
 int main()
 {
 	char tab[1001];
+	//char tab2[] =  "\n" ;
 	//I am enough of an artist to draw freely upon my imagination. Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world. - Albert Einstein
 	//could else to same contest intelligence \t hands interfaces, in   Eliezer down Anything Intelligence, to the the \t give enhancement of that beyond the rise world. change even intelligence neuroscience-based Artificial in \t league. doing Nothing as Yudkowsky - or smarter-than-human human - the \n form brain-computer - most is wins
 	//char tab2[] = " +alking and begin doing    Walt Disney";
@@ -93,15 +123,12 @@ int main()
 		printf("incorrect input");
 		return 1;
 	}
-	
-	remove_non_letters(tab);
 
-	reverse(tab);
+	swap_order_words(tab);
 	
-	trim(tab);
-	
+
 	if (*(tab + 0) == '\0') {
-		printf("wohs ot gnihtoN");
+		printf("show to Nothing");
 	}
 	else {
 		printf("%s", tab);

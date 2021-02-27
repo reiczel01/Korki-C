@@ -37,7 +37,7 @@ int main()
 	char tab[1001];
 	int uppercase = 0, lowercase = 0, whitespace = 0;
 	printf("Podaj tekst: ");
-	fgets(tab, 1000, stdin);
+	fgets(tab, 1001, stdin);
 	for (int i = 0; i < 1000; i++) {
 		if (*(tab + i) == '\n') {
 			*(tab + i) = '\0';
